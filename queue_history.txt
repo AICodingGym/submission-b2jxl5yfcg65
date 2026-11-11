@@ -1,0 +1,18 @@
+2026-11-10 16:21:52 START lstm_v4_feat2 :: --run lstm_v4_feat2 --feats v2 --seed 42 --epochs 200 --max_minutes 115
+2026-11-10 17:58:31 END lstm_v4_feat2 exit=0
+2026-11-10 17:58:31 START lstm_v5_feat2_s7 :: --run lstm_v5_feat2_s7 --feats v2 --seed 7 --epochs 200 --max_minutes 115
+2026-11-10 19:30:30 NOTE pod deleted during lstm_v5_feat2_s7 at epoch 133; resuming in new pod
+2026-11-10 19:30:30 START lstm_v5_feat2_s7 :: --run lstm_v5_feat2_s7 --feats v2 --seed 7 --epochs 200 --max_minutes 115 --resume
+2026-11-10 20:03:53 END lstm_v5_feat2_s7 exit=0
+2026-11-10 20:03:53 START lstm_v6_feat2_350ep :: --run lstm_v6_feat2_350ep --feats v2 --seed 11 --epochs 350 --max_minutes 185
+2026-11-10 22:58:29 END lstm_v6_feat2_350ep exit=0
+2026-11-10 22:58:29 START lstm_f1_feat2 :: --run lstm_f1_feat2 --fold 1 --feats v2 --seed 42 --epochs 200 --max_minutes 115
+2026-11-11 00:39:41 END lstm_f1_feat2 exit=0
+2026-11-11 00:39:41 START lstm_f2_feat2 :: --run lstm_f2_feat2 --fold 2 --feats v2 --seed 42 --epochs 200 --max_minutes 115
+2026-11-11 02:19:05 END lstm_f2_feat2 exit=0
+2026-11-11 02:19:05 START lstm_f3_feat2 :: --run lstm_f3_feat2 --fold 3 --feats v2 --seed 42 --epochs 200 --max_minutes 115
+2026-11-11 03:58:29 END lstm_f3_feat2 exit=0
+2026-11-11 03:58:29 START lstm_f4_feat2 :: --run lstm_f4_feat2 --fold 4 --feats v2 --seed 42 --epochs 200 --max_minutes 115
+2026-11-11 05:37:25 END lstm_f4_feat2 exit=0
+2026-11-11 05:37:25 QUEUE EMPTY
+2026-11-11 14:58:47 START lstm_t1_lr5e4 :: --run lstm_t1_lr5e4 --feats v2 --seed 42 --epochs 200 --lr 5e-4 --max_minutes 115
