@@ -12,3 +12,5 @@ timestamp,run,val_insp_mae,fit_seconds,device,notes
 2026-11-10T20:10:00,avg_v1_to_v5,0.1809,0,NVIDIA GeForce GTX 1080 Ti,"mean of 5 fold-0 LSTMs; submission_ens_v12345.csv"
 2026-11-10T22:58:00,lstm_v6_feat2_350ep,0.1914,10374,NVIDIA GeForce GTX 1080 Ti,"feats v2, seed 11, 350 ep (v5 got 0.1924 at 200 ep: within seed noise)"
 2026-11-10T23:04:00,avg_v1_to_v6,0.1779,0,NVIDIA GeForce GTX 1080 Ti,"mean of 6 fold-0 LSTMs; submission_ens_v1to6.csv; leaderboard 0.17333"
+2026-11-11T00:39:00,lstm_f1_feat2,0.1934,6000,NVIDIA GeForce GTX 1080 Ti,"fold 1 holdout (not comparable to fold-0 numbers), feats v2, seed 42, 200 ep"
+2026-11-11T01:45:00,avg_v1to6_f1_model,0.1857,0,NVIDIA GeForce GTX 1080 Ti,"OOF over folds 0-1; test = equal weight per model (7); leaderboard 0.17086"
