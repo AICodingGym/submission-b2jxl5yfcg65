@@ -27,3 +27,7 @@ timestamp,run,val_insp_mae,fit_seconds,device,notes
 2026-11-11T19:00:00,avg_all12_model,0.1906,0,NVIDIA GeForce GTX 1080 Ti,"11-model blend + t2 (fold-0 avg 0.1764); leaderboard 0.16909 (no gain; resubmitted all11 0.16888)"
 2026-11-11T20:51:00,lstm_full_s1,,7980,NVIDIA GeForce GTX 1080 Ti,"ALL-DATA model (--fold -1, base settings, seed 1, 200 ep): no holdout; ALONE leaderboard 0.1787 (vs v1 alone 0.19814)"
 2026-11-11T21:00:00,avg_all11_full1_model,,0,NVIDIA GeForce GTX 1080 Ti,"11-model blend + lstm_full_s1 (1/12 weight); leaderboard 0.16754"
+2026-11-11T23:06:00,lstm_full_wd_s2,,8022,NVIDIA GeForce GTX 1080 Ti,"ALL-DATA model, wd 5e-2, seed 2, 200 ep; ALONE leaderboard 0.16831"
+2026-11-11T23:15:00,avg_all11_full12_model,,0,NVIDIA GeForce GTX 1080 Ti,"11 old + 2 all-data models, equal weight per model; leaderboard 0.16571"
+2026-11-11T23:20:00,avg_full2,,0,NVIDIA GeForce GTX 1080 Ti,"mean of the 2 all-data models only; leaderboard 0.16285"
+2026-11-11T23:20:00,half_full2_old11,,0,NVIDIA GeForce GTX 1080 Ti,"0.5*mean(2 all-data) + 0.5*mean(11 old); leaderboard 0.16132 (TARGET 0.1638 MET; weights chosen from 2 pre-set options on leaderboard)"
