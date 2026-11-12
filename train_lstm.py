@@ -33,8 +33,10 @@ p.add_argument("--resume", action="store_true")
 p.add_argument("--eval_only", action="store_true", help="skip training; analyze best checkpoint")
 p.add_argument("--seed", type=int, default=42)
 p.add_argument("--feats", choices=["v1", "v2"], default="v1", help="input feature set")
-p.add_argument("--fold", type=int, default=0, choices=range(5),
-               help="validation fold from folds.csv (0 = original val_breaths.csv)")
+p.add_argument("--fold", type=int, default=0, choices=range(-1, 5),
+               help="validation fold from folds.csv (0 = original val_breaths.csv); "
+                    "-1 = train on ALL breaths, keep the final epoch (val numbers are then "
+                    "on fold-0 breaths the model trained on, so only a sanity check)")
 args = p.parse_args()
 
 torch.manual_seed(args.seed)
@@ -87,13 +89,16 @@ def to_arrays(df):
 t0 = time.time()
 X, y, _, bids = to_arrays(pd.read_csv("data/train.csv"))
 Xte, _, te_ids, _ = to_arrays(pd.read_csv("data/test.csv"))
-if args.fold == 0:  # fold 0 is the original fixed split -> earlier runs stay comparable
+FULL = args.fold == -1
+if args.fold in (0, -1):  # fold 0 is the original fixed split -> earlier runs stay comparable
     val_ids = pd.read_csv("val_breaths.csv")["breath_id"].to_numpy()
 else:
     folds = pd.read_csv("folds.csv")
     val_ids = folds.loc[folds["fold"] == args.fold, "breath_id"].to_numpy()
 is_val = np.isin(bids, val_ids)
 Xtr, ytr, Xva, yva, bva = X[~is_val], y[~is_val], X[is_val], y[is_val], bids[is_val]
+if FULL:  # train on every breath; the fold-0 "val" set is now inside training
+    Xtr, ytr = X.copy(), y.copy()
 if args.limit:
     Xtr, ytr = Xtr[: args.limit], ytr[: args.limit]
     Xva, yva, bva = Xva[: args.limit // 4], yva[: args.limit // 4], bva[: args.limit // 4]
@@ -176,7 +181,7 @@ for epoch in range(start_epoch, 0 if args.eval_only else args.epochs):
     sched.step()
     val_mae = masked_l1(predict(Xva_t), yva_t, mva_t).item()
     train_secs += time.time() - te
-    if val_mae < best_mae:
+    if val_mae < best_mae or FULL:  # FULL: no honest val set, so always keep the latest epoch
         best_mae = val_mae
         torch.save({"model": model.state_dict(), "mu": mu.tolist(), "sd": sd.tolist(), "args": vars(args)}, best_path)
     torch.save({"model": model.state_dict(), "opt": opt.state_dict(), "sched": sched.state_dict(),

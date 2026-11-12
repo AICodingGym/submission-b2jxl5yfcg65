@@ -23,9 +23,14 @@ args = p.parse_args()
 
 fold0_ids = np.sort(pd.read_csv("val_breaths.csv")["breath_id"].to_numpy())
 by_fold = defaultdict(list)
+full_runs = []  # --fold -1 runs trained on every breath: test predictions only, no OOF score
 for r in args.runs:
     z = np.load(f"val_pred_{r}.npz")
     fold = int(z["fold"]) if "fold" in z else 0          # runs before --fold existed = fold 0
+    if fold == -1:
+        full_runs.append(r)
+        print(f"all-data {r:28s} (trained on every breath: test predictions only)")
+        continue
     bids = z["bids"] if "bids" in z else fold0_ids
     mae = np.abs(z["pred"] - z["y"])[z["mask"]].mean()
     print(f"fold {fold}  {r:28s} val insp MAE {mae:.4f}")
@@ -51,6 +56,7 @@ for r, s in sub.items():
     assert (s["id"].values == ids).all(), r
 if args.weight == "fold":
     per_fold = [np.mean([sub[x[0]]["pressure"].values for x in by_fold[f]], axis=0) for f in by_fold]
+    per_fold += [sub[r]["pressure"].values for r in full_runs]  # each all-data run counts as one group
     pred = np.mean(per_fold, axis=0)
 else:
     pred = np.mean([s["pressure"].values for s in sub.values()], axis=0)
