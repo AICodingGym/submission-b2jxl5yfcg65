@@ -21,3 +21,5 @@ timestamp,run,val_insp_mae,fit_seconds,device,notes
 2026-11-11T04:15:00,avg_v1to6_f123_model,0.1908,0,NVIDIA GeForce GTX 1080 Ti,"OOF over folds 0-3; test = equal weight per model (9); leaderboard 0.16986 (no gain vs 8 models)"
 2026-11-11T05:37:00,lstm_f4_feat2,0.1914,5874,NVIDIA GeForce GTX 1080 Ti,"fold 4 holdout, feats v2, seed 42, 200 ep"
 2026-11-11T15:05:00,avg_all10_model,0.1909,0,NVIDIA GeForce GTX 1080 Ti,"OOF over all 5 folds; test = equal weight per model (10); leaderboard 0.16909"
+2026-11-11T16:47:00,lstm_t1_lr5e4,0.2027,6444,NVIDIA GeForce GTX 1080 Ti,"TEST 1: lr 5e-4 (else = v4: feats v2, seed 42, 200 ep). v4 got 0.2020 -> no gain; train L1 0.098 vs v4 0.083"
+2026-11-11T17:05:00,avg_all11_model,0.1908,0,NVIDIA GeForce GTX 1080 Ti,"10-model blend + t1 (fold-0 avg 0.1779->0.1770); leaderboard 0.16888"
